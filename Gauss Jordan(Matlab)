@@ -1,0 +1,16 @@
+a=input('enter co efficient matrix:');
+b=input('enter source vector:');
+n=length(b);   %no of unknowns
+x=zeros(n,1);
+aug = [a b]   %augmented matrix
+for j=1:n  %for columns
+    aug(j,:)= aug(j,:)/aug(j,j)  %1st row will update with divided by a11
+                                 
+    
+    for i=1:n  %for rows
+        if i~=j 
+            m=aug(i,j);
+            aug(i,:)=aug(i,:)-m*aug(j,:) %1st column a21 & a31 will be 0
+        end
+    end
+end
