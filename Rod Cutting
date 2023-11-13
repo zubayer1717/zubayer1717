@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+int rod_cutting(int length[],int ben[],int l,int n)
+{
+    int ans[n+1][l+1];
+    for(int i=0; i<n+1; i++){
+        for(int j=0; j<l+1; j++){
+            if(i==0||j==0){
+                ans[i][j]=0;
+            }
+            else if(j<i){
+                ans[i][j]=ans[i-1][j];
+            }
+            else {
+                ans[i][j]=max(ben[i]+ans[i][j-length[i]],ans[i-1][j]);
+            }
+        }
+    }
+    cout<<ans[n][l]<<endl;
+}
+int main()
+{
+    int n,l;
+    cin>>n;
+    int length[n+1],ben[n+1];
+    for(int i=1; i<=n; i++){
+        cin>>length[i]>>ben[i];
+    }
+    cin>>l;
+    rod_cutting(length,ben,l,n);
+    return 0;
+}
